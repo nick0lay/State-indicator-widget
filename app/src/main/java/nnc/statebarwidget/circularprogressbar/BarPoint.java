@@ -1,7 +1,8 @@
 package nnc.statebarwidget.circularprogressbar;
 
 /**
- * Color connecting line
+ * Bar tick representation
  */
-public class Line {
+public class BarPoint {
+    
 }
