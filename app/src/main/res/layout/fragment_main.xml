@@ -47,6 +47,7 @@
         android:layout_height="100dp"
         android:layout_below="@+id/progressCircular"/>
     <LinearLayout
+        android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -63,4 +64,13 @@
             android:text="Hide"
             android:id="@+id/hide"/>
     </LinearLayout>
+
+    <nnc.statebarwidget.circularprogressbar.StateBar
+        android:id="@+id/stateBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonContainer"
+        android:background="#44556677"/>
+
+
 </RelativeLayout>
