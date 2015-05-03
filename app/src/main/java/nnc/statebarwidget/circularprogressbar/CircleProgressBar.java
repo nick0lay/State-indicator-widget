@@ -29,6 +29,15 @@ public class CircleProgressBar extends View {
     private RectF rectF;
     private Paint backgroundPaint;
     private Paint foregroundPaint;
+    private Paint circlePaint;
+
+    //View center
+    private int centerY;
+    private int centerX;
+    //Internal radius of progress bar
+    private int circleRadius;
+    //External radius of progress bar
+    private int ringRadius;
 
     public CircleProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -61,6 +70,11 @@ public class CircleProgressBar extends View {
         foregroundPaint.setColor(color);
         foregroundPaint.setStyle(Paint.Style.STROKE);
         foregroundPaint.setStrokeWidth(strokeWidth);
+
+        circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        circlePaint.setStyle(Paint.Style.FILL);
+        circlePaint.setColor(adjustAlpha(color, 0.6f));
+
     }
 
     private int adjustAlpha(int color, float factor) {
@@ -77,13 +91,19 @@ public class CircleProgressBar extends View {
         final int width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         final int min = Math.min(width, height);
         setMeasuredDimension(min, min);
-        rectF.set(0 + strokeWidth / 2, 0 + strokeWidth / 2, min - strokeWidth / 2, min - strokeWidth / 2);
+        centerX = width / 2;
+        centerY = height / 2;
+        circleRadius = (int)(min/2 - strokeWidth);
+        ringRadius = (int)(min/2  - strokeWidth/2);
+        rectF.set(0 + strokeWidth/2, 0 + strokeWidth/2, min - strokeWidth/2, min - strokeWidth/2);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawOval(rectF, backgroundPaint);
+//        canvas.drawOval(rectF, backgroundPaint);
+        canvas.drawCircle(centerX, centerY, ringRadius, backgroundPaint);
+        canvas.drawCircle(centerX, centerY, circleRadius, circlePaint);
         float angle = 360 * progress / max;
         canvas.drawArc(rectF, startAngle, angle, false, foregroundPaint);
     }
