@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
@@ -59,6 +60,8 @@ public class MainActivity extends ActionBarActivity {
         private ProgressBar progressBar;
         private SeekBar seekBar;
         private CircleProgressBar circleProgressBar;
+        private Button show;
+        private Button hide;
 
         public PlaceholderFragment() {
         }
@@ -70,6 +73,20 @@ public class MainActivity extends ActionBarActivity {
             progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
             seekBar = (SeekBar) rootView.findViewById(R.id.seekBar);
             circleProgressBar = (CircleProgressBar) rootView.findViewById(R.id.progressCircular);
+            show = (Button) rootView.findViewById(R.id.show);
+            hide = (Button) rootView.findViewById(R.id.hide);
+            show.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    circleProgressBar.showProgressBackground();
+                }
+            });
+            hide.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    circleProgressBar.hideProgressBackground();
+                }
+            });
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

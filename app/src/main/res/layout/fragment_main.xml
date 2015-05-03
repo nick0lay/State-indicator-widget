@@ -29,8 +29,8 @@
 
     <nnc.statebarwidget.circularprogressbar.CircleProgressBar
         android:id="@+id/progressCircular"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         app:progress="35"
         app:progressBarThickness="4dp"
@@ -46,4 +46,21 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_below="@+id/progressCircular"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/circularImageView"
+        android:gravity="center_horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show"
+            android:id="@+id/show"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hide"
+            android:id="@+id/hide"/>
+    </LinearLayout>
 </RelativeLayout>
