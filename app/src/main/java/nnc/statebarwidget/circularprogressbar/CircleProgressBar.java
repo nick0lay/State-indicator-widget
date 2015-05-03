@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -18,6 +19,8 @@ public class CircleProgressBar extends View {
      * ProgressBar's line thickness
      */
     private float strokeWidth = 2.0f;
+    private float stroke = 0;
+
     private float progress = 0;
     private int min = 0;
     private int max = 100;
@@ -94,7 +97,8 @@ public class CircleProgressBar extends View {
         centerX = width / 2;
         centerY = height / 2;
         circleRadius = (int)(min/2 - strokeWidth);
-        ringRadius = (int)(min/2  - strokeWidth/2);
+        ringRadius = (int)(min/2  - strokeWidth/2 - (strokeWidth/2 - stroke/2));
+        backgroundPaint.setStrokeWidth(stroke);
         rectF.set(0 + strokeWidth/2, 0 + strokeWidth/2, min - strokeWidth/2, min - strokeWidth/2);
     }
 
@@ -124,6 +128,26 @@ public class CircleProgressBar extends View {
     public void setProgressWithAnimation(float progress) {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "progress", this.progress, progress);
         objectAnimator.setDuration(1500);
+        objectAnimator.setInterpolator(new DecelerateInterpolator());
+        objectAnimator.start();
+    }
+
+    public void setAnimateStrokeWidth(float strokeWidth) {
+        this.stroke = strokeWidth;
+        invalidate();
+        requestLayout();//Because it should recalculate its bounds
+    }
+
+    public void showProgressBackground(){
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "animateStrokeWidth", 0, this.strokeWidth);
+        objectAnimator.setDuration(300);
+        objectAnimator.setInterpolator(new DecelerateInterpolator());
+        objectAnimator.start();
+    }
+
+    public void hideProgressBackground(){
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "animateStrokeWidth", this.strokeWidth, 0);
+        objectAnimator.setDuration(300);
         objectAnimator.setInterpolator(new DecelerateInterpolator());
         objectAnimator.start();
     }
