@@ -14,14 +14,20 @@ import android.view.animation.DecelerateInterpolator;
 
 import nnc.statebarwidget.R;
 
-public class CircleProgressBar extends View {
-    private static final String TAG = CircleProgressBar.class.getSimpleName();
+/**
+ * Circular progress bar implementation.
+ *
+ * Current implementation based on
+ * <a href = "https://github.com/Pedramrn/CircularProgressBar/blob/master/app/src/main/java/com/mrn/customprogressbar/CircleProgressBar.java">CircularProgressBar</a>
+ * implementation.
+ */
+public class CircularProgressBar extends View {
+    private static final String TAG = CircularProgressBar.class.getSimpleName();
     /**
      * ProgressBar's line thickness
      */
     private float strokeWidth = 2.0f;
     private float stroke = 0;
-
     private float progress = 0;
     private int min = 0;
     private int max = 100;
@@ -43,7 +49,7 @@ public class CircleProgressBar extends View {
     //External radius of progress bar
     private int ringRadius;
 
-    public CircleProgressBar(Context context, AttributeSet attrs) {
+    public CircularProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
@@ -52,15 +58,15 @@ public class CircleProgressBar extends View {
         rectF = new RectF();
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.CircleProgressBar,
+                R.styleable.CircularProgressBar,
                 0, 0);
         //Reading values from the XML layout
         try {
-            strokeWidth = typedArray.getDimension(R.styleable.CircleProgressBar_progressBarThickness, strokeWidth);
-            progress = typedArray.getFloat(R.styleable.CircleProgressBar_progress, progress);
-            color = typedArray.getInt(R.styleable.CircleProgressBar_progressbarColor, color);
-            min = typedArray.getInt(R.styleable.CircleProgressBar_min, min);
-            max = typedArray.getInt(R.styleable.CircleProgressBar_max, max);
+            strokeWidth = typedArray.getDimension(R.styleable.CircularProgressBar_progressBarThickness, strokeWidth);
+            progress = typedArray.getFloat(R.styleable.CircularProgressBar_progress, progress);
+            color = typedArray.getInt(R.styleable.CircularProgressBar_progressbarColor, color);
+            min = typedArray.getInt(R.styleable.CircularProgressBar_min, min);
+            max = typedArray.getInt(R.styleable.CircularProgressBar_max, max);
         } finally {
             typedArray.recycle();
         }
@@ -107,7 +113,6 @@ public class CircleProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-//        canvas.drawOval(rectF, backgroundPaint);
         canvas.drawCircle(centerX, centerY, ringRadius, backgroundPaint);
         canvas.drawCircle(centerX, centerY, circleRadius, circlePaint);
         float angle = 360 * progress / max;

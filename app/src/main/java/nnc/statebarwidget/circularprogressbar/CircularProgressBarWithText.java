@@ -14,7 +14,7 @@ import nnc.statebarwidget.R;
 public class CircularProgressBarWithText extends LinearLayout{
     private static final String TAG = CircularProgressBarWithText.class.getSimpleName();
 
-    private CircleProgressBar progressBar;
+    private CircularProgressBar progressBar;
     private TextView above;
     private TextView below;
 
@@ -36,7 +36,7 @@ public class CircularProgressBarWithText extends LinearLayout{
 
         //Internal views
         View v = View.inflate(context, R.layout.circular_progress_bar_with_text, this);
-        progressBar = (CircleProgressBar)v.findViewById(R.id.progressCircular);
+        progressBar = (CircularProgressBar)v.findViewById(R.id.progressCircular);
         above = (TextView)v.findViewById(R.id.textAbove);
         below = (TextView)v.findViewById(R.id.textBelow);
     }

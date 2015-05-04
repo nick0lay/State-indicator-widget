@@ -30,7 +30,7 @@ public class StateBar extends ViewGroup {
     private final Rect mTmpContainerRect = new Rect();
     private final Rect mTmpChildRect = new Rect();
 
-    private ArrayList<CircleProgressBar> points = new ArrayList<>();
+    private ArrayList<CircularProgressBar> points = new ArrayList<>();
     private Bar bar;
     private PointPositionStrategy strategy;
 

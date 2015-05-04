@@ -1,7 +1,6 @@
 package nnc.statebarwidget;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
-import nnc.statebarwidget.circularprogressbar.CircleProgressBar;
+import nnc.statebarwidget.circularprogressbar.CircularProgressBar;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -59,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
     public static class PlaceholderFragment extends Fragment {
         private ProgressBar progressBar;
         private SeekBar seekBar;
-        private CircleProgressBar circleProgressBar;
+        private CircularProgressBar circularProgressBar;
         private Button show;
         private Button hide;
 
@@ -72,26 +70,26 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
             seekBar = (SeekBar) rootView.findViewById(R.id.seekBar);
-            circleProgressBar = (CircleProgressBar) rootView.findViewById(R.id.progressCircular);
+            circularProgressBar = (CircularProgressBar) rootView.findViewById(R.id.progressCircular);
             show = (Button) rootView.findViewById(R.id.show);
             hide = (Button) rootView.findViewById(R.id.hide);
             show.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    circleProgressBar.showProgressBackground();
+                    circularProgressBar.showProgressBackground();
                 }
             });
             hide.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    circleProgressBar.hideProgressBackground();
+                    circularProgressBar.hideProgressBackground();
                 }
             });
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     progressBar.setProgress(progress);
-                    circleProgressBar.setProgressWithAnimation(progress);
+                    circularProgressBar.setProgressWithAnimation(progress);
                 }
 
                 @Override

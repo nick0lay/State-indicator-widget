@@ -37,7 +37,7 @@
         android:layout_below="@+id/progressBar"
         android:layout_centerHorizontal="true"/>
 
-    <nnc.statebarwidget.circularprogressbar.CircleProgressBar
+    <nnc.statebarwidget.circularprogressbar.CircularProgressBar
         android:id="@+id/progressCircular"
         android:layout_width="30dp"
         android:layout_height="30dp"
