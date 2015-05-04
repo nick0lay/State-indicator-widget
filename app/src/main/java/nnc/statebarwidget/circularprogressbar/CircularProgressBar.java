@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,8 @@ public class CircularProgressBar extends View {
     private int circleRadius;
     //External radius of progress bar
     private int ringRadius;
+
+    private Drawable drawable;
 
     public CircularProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -117,6 +120,13 @@ public class CircularProgressBar extends View {
         canvas.drawCircle(centerX, centerY, circleRadius, circlePaint);
         float angle = 360 * progress / max;
         canvas.drawArc(rectF, startAngle, angle, false, foregroundPaint);
+        if(drawable != null) {
+            //Draw background icon
+            int xDelta = (int) (Math.cos(Math.toRadians(45)) * ringRadius);
+            int yDelta = (int) (Math.sin(Math.toRadians(45)) * ringRadius);
+            drawable.setBounds(centerX - xDelta, centerY - yDelta, centerX + xDelta, centerY + yDelta);
+            drawable.draw(canvas);
+        }
     }
 
     public void setProgress(float progress) {
@@ -157,5 +167,13 @@ public class CircularProgressBar extends View {
         objectAnimator.setDuration(300);
         objectAnimator.setInterpolator(new DecelerateInterpolator());
         objectAnimator.start();
+    }
+
+    public Drawable getDrawable() {
+        return drawable;
+    }
+
+    public void setDrawable(Drawable drawable) {
+        this.drawable = drawable;
     }
 }
