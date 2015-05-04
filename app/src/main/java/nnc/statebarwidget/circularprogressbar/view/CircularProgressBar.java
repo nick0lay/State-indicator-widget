@@ -1,4 +1,4 @@
-package nnc.statebarwidget.circularprogressbar;
+package nnc.statebarwidget.circularprogressbar.view;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;

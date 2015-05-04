@@ -1,6 +1,7 @@
-package nnc.statebarwidget.circularprogressbar;
+package nnc.statebarwidget.circularprogressbar.view;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -9,13 +10,18 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+
+import nnc.statebarwidget.circularprogressbar.Bar;
+import nnc.statebarwidget.circularprogressbar.IndicatorAdapter;
+import nnc.statebarwidget.circularprogressbar.PointPositionStrategy;
 
 /**
  * Full state bar representation
  */
-public class StateBar extends ViewGroup {
+public class Indicator extends ViewGroup {
 
     private int mDefaultWidth = 500;
     private int mDefaultHeight = 150;
@@ -34,7 +40,16 @@ public class StateBar extends ViewGroup {
     private Bar bar;
     private PointPositionStrategy strategy;
 
-    public StateBar(Context context, AttributeSet attrs) {
+    private IndicatorAdapter adapter;
+    private DataSetObserver observer = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            updateIndicator();
+        }
+    };
+
+    public Indicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         initProgressBar(attrs);
     }
@@ -170,72 +185,86 @@ public class StateBar extends ViewGroup {
         int barColor = Color.BLACK;
         int activeBarColor = Color.GREEN;
 
-        View firstChild = getChildAt(0);
-        View lastChild = getChildAt(count - 1);
-        float xCenterFirst = firstChild.getLeft() + (firstChild.getRight() - firstChild.getLeft())/2;
-        float xCenterLast = lastChild.getLeft() + (lastChild.getRight() - lastChild.getLeft())/2;
-        float length = xCenterLast - xCenterFirst;
-        float x = xCenterFirst;
-        float y = (firstChild.getBottom() - firstChild.getTop())/2;
-        tickCount = count;
-        tickWidth = firstChild.getRight() - firstChild.getLeft();
-        bar = new Bar(x, y, length, tickCount, tickWidth, strokeWidth, activeStrokeWidth, barColor, activeBarColor);
+        int chilCount = getChildCount();
+        if(chilCount > 0) {
+            View firstChild = getChildAt(0);
+            View lastChild = getChildAt(count - 1);
+            float xCenterFirst = firstChild.getLeft() + (firstChild.getRight() - firstChild.getLeft()) / 2;
+            float xCenterLast = lastChild.getLeft() + (lastChild.getRight() - lastChild.getLeft()) / 2;
+            float length = xCenterLast - xCenterFirst;
+            float x = xCenterFirst;
+            float y = (firstChild.getBottom() - firstChild.getTop()) / 2;
+            tickCount = count;
+            tickWidth = firstChild.getRight() - firstChild.getLeft();
+            bar = new Bar(x, y, length, tickCount, tickWidth, strokeWidth, activeStrokeWidth, barColor, activeBarColor);
+        }
     }
 
     private void initProgressBar(AttributeSet attrs) {
-        CircularProgressBarWithText point = new CircularProgressBarWithText(getContext());
-        addView(point);
-        CircularProgressBarWithText point1 = new CircularProgressBarWithText(getContext());
-        addView(point1);
-        CircularProgressBarWithText point2 = new CircularProgressBarWithText(getContext());
-        addView(point2);
-        CircularProgressBarWithText point3 = new CircularProgressBarWithText(getContext());
-        addView(point3);
-        CircularProgressBarWithText point4 = new CircularProgressBarWithText(getContext());
-        addView(point4);
+//        CircularProgressBarWithText point = new CircularProgressBarWithText(getContext());
+//        addView(point);
+//        CircularProgressBarWithText point1 = new CircularProgressBarWithText(getContext());
+//        addView(point1);
+//        CircularProgressBarWithText point2 = new CircularProgressBarWithText(getContext());
+//        addView(point2);
+//        CircularProgressBarWithText point3 = new CircularProgressBarWithText(getContext());
+//        addView(point3);
+//        CircularProgressBarWithText point4 = new CircularProgressBarWithText(getContext());
+//        addView(point4);
         strategy = new PointPositionStrategy(5);
     }
 
-//    public void addPoint(BarPoint point){
-//        if(point != null && !points.contains(point)){
-//            points.add(point);
-//        }
-//    }
-//
-//    public void removePoint(BarPoint point){
-//        if(point != null){
-//            points.remove(point);
-//        }
-//    }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    private void updateIndicator() {
+        if(adapter == null){
+            removeAllViews();
+            return;
+        }
+        int childCount = getChildCount();
+        int adapterCount = adapter.getCount();
+        if(childCount != adapterCount){
+            invalidateViews();
+        } else {
+            updateViews();
+        }
+    }
 
-        float tickWidth = 10.0f;
-        float padding = tickWidth/2;
-        int tickCount = 6;
-        float strokeWidth = 2.0f;
-        float activeStrokeWidth = 4.0f;
-        int barColor = Color.BLACK;
-        int activeBarColor = Color.GREEN;
+    /**
+     * Update view values
+     */
+    private void updateViews() {
+        int adapterCount = adapter.getCount();
+        for(int i = 0; i < adapterCount; i++){
+            View view = getChildAt(i);
+            //Update existing view
+            View updatedView = adapter.getView(view, i);
+            if(!view.equals(updatedView)){
+                throw new  IllegalStateException("Update supplied indicator view instead creating new one");
+            }
+        }
+        invalidate();
+    }
 
-        final int count = getChildCount();
-        View firstChild = getChildAt(0);
-        View lastChild = getChildAt(count - 1);
+    /**
+     * Fill in indicator with new view items
+     */
+    private void invalidateViews() {
+        removeAllViews();
+        int adapterCount = adapter.getCount();
+        for(int i = 0; i < adapterCount; i++){
+            View updatedView = adapter.getView(null, i);
+            addView(updatedView);
+        }
+        requestLayout();
+    }
 
-//        float length = w - 2 * padding;
-//
-//        float x = padding;
-//        float y = h/2;
-//        float xCenterFirst = (firstChild.getRight() - firstChild.getLeft())/2;
-//        float xCenterLast = (lastChild.getRight() - lastChild.getLeft())/2;
-//        float length = xCenterLast - xCenterFirst;
-//        float x = xCenterFirst;
-//        float y = (firstChild.getBottom() - firstChild.getTop())/2;
-//        tickCount = count;
-//        tickWidth = firstChild.getRight() - firstChild.getLeft();
-//        bar = new Bar(x, y, length, tickCount, tickWidth, strokeWidth, activeStrokeWidth, barColor, activeBarColor);
+    public IndicatorAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(IndicatorAdapter adapter) {
+        this.adapter = adapter;
+        adapter.setDataObserver(observer);
     }
 
     @Override
@@ -253,7 +282,7 @@ public class StateBar extends ViewGroup {
 
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return new StateBar.LayoutParams(getContext(), attrs);
+        return new Indicator.LayoutParams(getContext(), attrs);
     }
 
     @Override

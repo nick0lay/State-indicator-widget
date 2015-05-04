@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
-import nnc.statebarwidget.circularprogressbar.CircularProgressBar;
+import nnc.statebarwidget.circularprogressbar.IndicatorAdapterImpl;
+import nnc.statebarwidget.circularprogressbar.view.CircularProgressBar;
+import nnc.statebarwidget.circularprogressbar.view.Indicator;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -60,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
         private CircularProgressBar circularProgressBar;
         private Button show;
         private Button hide;
+        private Indicator indicator;
 
         public PlaceholderFragment() {
         }
@@ -68,6 +71,7 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            indicator = (Indicator) rootView.findViewById(R.id.stateBar);
             progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
             seekBar = (SeekBar) rootView.findViewById(R.id.seekBar);
             circularProgressBar = (CircularProgressBar) rootView.findViewById(R.id.progressCircular);
@@ -102,6 +106,8 @@ public class MainActivity extends ActionBarActivity {
 
                 }
             });
+            indicator.setAdapter(new IndicatorAdapterImpl(getActivity()));
+            indicator.getAdapter().notifyDataChanged();
             return rootView;
         }
     }

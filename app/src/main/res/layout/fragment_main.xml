@@ -13,7 +13,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$PlaceholderFragment">
-    <nnc.statebarwidget.circularprogressbar.CircularProgressBarWithText
+    <nnc.statebarwidget.circularprogressbar.view.CircularProgressBarWithText
         android:id="@+id/progressCircularWithText"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -37,7 +37,7 @@
         android:layout_below="@+id/progressBar"
         android:layout_centerHorizontal="true"/>
 
-    <nnc.statebarwidget.circularprogressbar.CircularProgressBar
+    <nnc.statebarwidget.circularprogressbar.view.CircularProgressBar
         android:id="@+id/progressCircular"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -70,7 +70,7 @@
             android:id="@+id/hide"/>
     </LinearLayout>
 
-    <nnc.statebarwidget.circularprogressbar.StateBar
+    <nnc.statebarwidget.circularprogressbar.view.Indicator
         android:id="@+id/stateBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

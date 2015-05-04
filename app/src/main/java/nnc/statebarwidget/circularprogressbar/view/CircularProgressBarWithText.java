@@ -1,4 +1,4 @@
-package nnc.statebarwidget.circularprogressbar;
+package nnc.statebarwidget.circularprogressbar.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -11,6 +11,7 @@ import nnc.statebarwidget.R;
 /**
  * Circular progress bar with text elements above and below
  */
+@Deprecated
 public class CircularProgressBarWithText extends LinearLayout{
     private static final String TAG = CircularProgressBarWithText.class.getSimpleName();
 
@@ -40,4 +41,28 @@ public class CircularProgressBarWithText extends LinearLayout{
         above = (TextView)v.findViewById(R.id.textAbove);
         below = (TextView)v.findViewById(R.id.textBelow);
     }
+
+    public void setTextAbove(CharSequence text){
+        above.setText(text);
+    }
+
+    public void setTextBelow(CharSequence text){
+        below.setText(text);
+    }
+
+    public void setProgress(int progress){
+
+    }
+
+    public void setProgressAnimated(int progress){
+
+    }
+//
+//    public void showProgress(){
+//
+//    }
+//
+//    public void hideProgress(){
+//
+//    }
 }
