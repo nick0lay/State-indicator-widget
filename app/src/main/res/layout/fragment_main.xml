@@ -51,17 +51,12 @@
         android:background="@drawable/circle_shape"
         android:layout_toRightOf="@+id/progressCircular"
         android:layout_below="@+id/seekBar"/>
-    <nnc.statebarwidget.circularprogressbar.CircularImageView
-        android:id="@+id/circularImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/progressCircular"/>
     <LinearLayout
         android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/circularImageView"
+        android:layout_below="@+id/progressCircular"
         android:gravity="center_horizontal">
         <Button
             android:layout_width="wrap_content"
