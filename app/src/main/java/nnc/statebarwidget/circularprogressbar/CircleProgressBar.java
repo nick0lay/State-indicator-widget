@@ -15,6 +15,7 @@ import android.view.animation.DecelerateInterpolator;
 import nnc.statebarwidget.R;
 
 public class CircleProgressBar extends View {
+    private static final String TAG = CircleProgressBar.class.getSimpleName();
     /**
      * ProgressBar's line thickness
      */
@@ -94,6 +95,7 @@ public class CircleProgressBar extends View {
         final int width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         final int min = Math.min(width, height);
         setMeasuredDimension(min, min);
+        Log.d(TAG, "Size - " + min + "x" + min);
         centerX = width / 2;
         centerY = height / 2;
         circleRadius = (int)(min/2 - strokeWidth);

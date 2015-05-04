@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonContainer"
-        android:background="#44556677"/>
+        android:background="@drawable/state_bar_background"/>
 
 
 </RelativeLayout>

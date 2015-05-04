@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -33,6 +32,7 @@ public class StateBar extends ViewGroup {
 
     private ArrayList<CircleProgressBar> points = new ArrayList<>();
     private Bar bar;
+    private PointPositionStrategy strategy;
 
     public StateBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -129,6 +129,8 @@ public class StateBar extends ViewGroup {
         final int parentTop = getPaddingTop();
         final int parentBottom = bottom - top - getPaddingBottom();
 
+        strategy.setAvailiableSpace(bottom - top, right - left);
+
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
@@ -137,35 +139,42 @@ public class StateBar extends ViewGroup {
                 final int width = child.getMeasuredWidth();
                 final int height = child.getMeasuredHeight();
 
-                // Compute the frame in which we are placing this child.
-                mTmpContainerRect.left = middleLeft + lp.leftMargin;
-                mTmpContainerRect.right = middleRight - lp.rightMargin;
-                mTmpContainerRect.top = parentTop + lp.topMargin;
-                mTmpContainerRect.bottom = parentBottom - lp.bottomMargin;
 
-                // Use the child's gravity and size to determine its final
-                // frame within its container.
-                Gravity.apply(lp.gravity, width, height, mTmpContainerRect, mTmpChildRect);
+//                // Compute the frame in which we are placing this child.
+//                mTmpContainerRect.left = middleLeft + lp.leftMargin;
+//                mTmpContainerRect.right = middleRight - lp.rightMargin;
+//                mTmpContainerRect.top = parentTop + lp.topMargin;
+//                mTmpContainerRect.bottom = parentBottom - lp.bottomMargin;
+//
+//                // Use the child's gravity and size to determine its final
+//                // frame within its container.
+//                Gravity.apply(lp.gravity, width, height, mTmpContainerRect, mTmpChildRect);
+//
+//                // Place the child.
+//                child.layout(mTmpChildRect.left, mTmpChildRect.top,
+//                        mTmpChildRect.right, mTmpChildRect.bottom);
 
-                // Place the child.
+                strategy.getElementRect(i, width, height, mTmpChildRect);
                 child.layout(mTmpChildRect.left, mTmpChildRect.top,
                         mTmpChildRect.right, mTmpChildRect.bottom);
-                Log.d("layout", "Container - " + mTmpContainerRect.toString());
+
+                Log.d("layout", "Container - " + mTmpChildRect.toString());
             }
         }
     }
 
     private void initProgressBar(AttributeSet attrs) {
-        CircularProgressBarWithText point = new CircularProgressBarWithText(getContext(), attrs);
+        CircularProgressBarWithText point = new CircularProgressBarWithText(getContext());
         addView(point);
-        CircularProgressBarWithText point1 = new CircularProgressBarWithText(getContext(), attrs);
+        CircularProgressBarWithText point1 = new CircularProgressBarWithText(getContext());
         addView(point1);
-        CircularProgressBarWithText point2 = new CircularProgressBarWithText(getContext(), attrs);
+        CircularProgressBarWithText point2 = new CircularProgressBarWithText(getContext());
         addView(point2);
-        CircularProgressBarWithText point3 = new CircularProgressBarWithText(getContext(), attrs);
+        CircularProgressBarWithText point3 = new CircularProgressBarWithText(getContext());
         addView(point3);
-        CircularProgressBarWithText point4 = new CircularProgressBarWithText(getContext(), attrs);
+        CircularProgressBarWithText point4 = new CircularProgressBarWithText(getContext());
         addView(point4);
+        strategy = new PointPositionStrategy(5);
     }
 
 //    public void addPoint(BarPoint point){
