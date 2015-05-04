@@ -80,6 +80,7 @@ public class Bar {
     public void draw(Canvas canvas) {
         for(int i = 0; i < numSegments; i++) {
             canvas.drawLine(getLeftX(i), y, getRightX(i), y, activeBarPaint);
+            Log.d("Bar", "Draw bar xLeft - " + getLeftX(i) + " xRight - " + getRightX(i) + " y - " + y);
         }
     }
 

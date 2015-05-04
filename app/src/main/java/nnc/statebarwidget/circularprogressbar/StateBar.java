@@ -161,6 +161,25 @@ public class StateBar extends ViewGroup {
                 Log.d("layout", "Container - " + mTmpChildRect.toString());
             }
         }
+
+        float tickWidth = 10.0f;
+        float padding = tickWidth/2;
+        int tickCount = 6;
+        float strokeWidth = 2.0f;
+        float activeStrokeWidth = 4.0f;
+        int barColor = Color.BLACK;
+        int activeBarColor = Color.GREEN;
+
+        View firstChild = getChildAt(0);
+        View lastChild = getChildAt(count - 1);
+        float xCenterFirst = firstChild.getLeft() + (firstChild.getRight() - firstChild.getLeft())/2;
+        float xCenterLast = lastChild.getLeft() + (lastChild.getRight() - lastChild.getLeft())/2;
+        float length = xCenterLast - xCenterFirst;
+        float x = xCenterFirst;
+        float y = (firstChild.getBottom() - firstChild.getTop())/2;
+        tickCount = count;
+        tickWidth = firstChild.getRight() - firstChild.getLeft();
+        bar = new Bar(x, y, length, tickCount, tickWidth, strokeWidth, activeStrokeWidth, barColor, activeBarColor);
     }
 
     private void initProgressBar(AttributeSet attrs) {
@@ -200,11 +219,23 @@ public class StateBar extends ViewGroup {
         float activeStrokeWidth = 4.0f;
         int barColor = Color.BLACK;
         int activeBarColor = Color.GREEN;
-        float length = w - 2 * padding;
 
-        float x = padding;
-        float y = h/2;
-        bar = new Bar(x, y, length, tickCount, tickWidth, strokeWidth, activeStrokeWidth, barColor, activeBarColor);
+        final int count = getChildCount();
+        View firstChild = getChildAt(0);
+        View lastChild = getChildAt(count - 1);
+
+//        float length = w - 2 * padding;
+//
+//        float x = padding;
+//        float y = h/2;
+//        float xCenterFirst = (firstChild.getRight() - firstChild.getLeft())/2;
+//        float xCenterLast = (lastChild.getRight() - lastChild.getLeft())/2;
+//        float length = xCenterLast - xCenterFirst;
+//        float x = xCenterFirst;
+//        float y = (firstChild.getBottom() - firstChild.getTop())/2;
+//        tickCount = count;
+//        tickWidth = firstChild.getRight() - firstChild.getLeft();
+//        bar = new Bar(x, y, length, tickCount, tickWidth, strokeWidth, activeStrokeWidth, barColor, activeBarColor);
     }
 
     @Override
