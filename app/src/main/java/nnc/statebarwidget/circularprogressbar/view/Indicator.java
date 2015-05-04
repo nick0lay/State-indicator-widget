@@ -10,13 +10,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import nnc.statebarwidget.circularprogressbar.Bar;
 import nnc.statebarwidget.circularprogressbar.IndicatorAdapter;
 import nnc.statebarwidget.circularprogressbar.PointPositionStrategy;
+import nnc.statebarwidget.circularprogressbar.SimpleConnectionLineDrawer;
 
 /**
  * Full state bar representation
@@ -37,8 +36,8 @@ public class Indicator extends ViewGroup {
     private final Rect mTmpChildRect = new Rect();
 
     private ArrayList<CircularProgressBar> points = new ArrayList<>();
-    private Bar bar;
     private PointPositionStrategy strategy;
+    private SimpleConnectionLineDrawer simpleConnectionLineDrawer = new SimpleConnectionLineDrawer(2.0f, Color.BLACK);
 
     private IndicatorAdapter adapter;
     private DataSetObserver observer = new DataSetObserver() {
@@ -176,28 +175,28 @@ public class Indicator extends ViewGroup {
                 Log.d("layout", "Container - " + mTmpChildRect.toString());
             }
         }
-
-        float tickWidth = 10.0f;
-        float padding = tickWidth/2;
-        int tickCount = 6;
-        float strokeWidth = 2.0f;
-        float activeStrokeWidth = 4.0f;
-        int barColor = Color.BLACK;
-        int activeBarColor = Color.GREEN;
-
-        int chilCount = getChildCount();
-        if(chilCount > 0) {
-            View firstChild = getChildAt(0);
-            View lastChild = getChildAt(count - 1);
-            float xCenterFirst = firstChild.getLeft() + (firstChild.getRight() - firstChild.getLeft()) / 2;
-            float xCenterLast = lastChild.getLeft() + (lastChild.getRight() - lastChild.getLeft()) / 2;
-            float length = xCenterLast - xCenterFirst;
-            float x = xCenterFirst;
-            float y = (firstChild.getBottom() - firstChild.getTop()) / 2;
-            tickCount = count;
-            tickWidth = firstChild.getRight() - firstChild.getLeft();
-            bar = new Bar(x, y, length, tickCount, tickWidth, strokeWidth, activeStrokeWidth, barColor, activeBarColor);
-        }
+//
+//        float tickWidth = 10.0f;
+//        float padding = tickWidth/2;
+//        int tickCount = 6;
+//        float strokeWidth = 2.0f;
+//        float activeStrokeWidth = 4.0f;
+//        int barColor = Color.BLACK;
+//        int activeBarColor = Color.GREEN;
+//
+//        int chilCount = getChildCount();
+//        if(chilCount > 0) {
+//            View firstChild = getChildAt(0);
+//            View lastChild = getChildAt(count - 1);
+//            float xCenterFirst = firstChild.getLeft() + (firstChild.getRight() - firstChild.getLeft()) / 2;
+//            float xCenterLast = lastChild.getLeft() + (lastChild.getRight() - lastChild.getLeft()) / 2;
+//            float length = xCenterLast - xCenterFirst;
+//            float x = xCenterFirst;
+//            float y = (firstChild.getBottom() - firstChild.getTop()) / 2;
+//            tickCount = count;
+//            tickWidth = firstChild.getRight() - firstChild.getLeft();
+//            connnectionLineDrawer = new ConnnectionLineDrawerImpl(x, y, length, tickCount, tickWidth, strokeWidth, barColor);
+//        }
     }
 
     private void initProgressBar(AttributeSet attrs) {
@@ -270,8 +269,13 @@ public class Indicator extends ViewGroup {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(bar != null){
-            bar.draw(canvas);
+        int childCount = getChildCount();
+        if(simpleConnectionLineDrawer != null && childCount > 1){
+            for(int i = 0; i < (childCount - 1); i++){
+                View childFrom = getChildAt(i);
+                View childTo = getChildAt(i + 1);
+                simpleConnectionLineDrawer.draw(canvas, childFrom, childTo);
+            }
         }
     }
 

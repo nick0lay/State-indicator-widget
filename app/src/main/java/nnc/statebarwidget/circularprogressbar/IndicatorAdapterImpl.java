@@ -10,7 +10,6 @@ import java.util.Random;
 
 import nnc.statebarwidget.R;
 import nnc.statebarwidget.circularprogressbar.view.CircularProgressBar;
-import nnc.statebarwidget.circularprogressbar.view.CircularProgressBarWithText;
 
 /**
  * {@link nnc.statebarwidget.circularprogressbar.IndicatorAdapter} implementation
