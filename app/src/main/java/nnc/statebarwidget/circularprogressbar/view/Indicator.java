@@ -13,9 +13,11 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import nnc.statebarwidget.circularprogressbar.ConnectionLineDrawer;
 import nnc.statebarwidget.circularprogressbar.IndicatorAdapter;
-import nnc.statebarwidget.circularprogressbar.PointPositionStrategy;
+import nnc.statebarwidget.circularprogressbar.StatePositionStrategyImpl;
 import nnc.statebarwidget.circularprogressbar.SimpleConnectionLineDrawer;
+import nnc.statebarwidget.circularprogressbar.StatePositioningStrategy;
 
 /**
  * Full state bar representation
@@ -36,8 +38,8 @@ public class Indicator extends ViewGroup {
     private final Rect mTmpChildRect = new Rect();
 
     private ArrayList<CircularProgressBar> points = new ArrayList<>();
-    private PointPositionStrategy strategy;
-    private SimpleConnectionLineDrawer simpleConnectionLineDrawer = new SimpleConnectionLineDrawer(2.0f, Color.BLACK);
+    private StatePositioningStrategy strategy = new StatePositionStrategyImpl();
+    private ConnectionLineDrawer simpleConnectionLineDrawer = new SimpleConnectionLineDrawer(2.0f, Color.BLACK);
 
     private IndicatorAdapter adapter;
     private DataSetObserver observer = new DataSetObserver() {
@@ -143,7 +145,7 @@ public class Indicator extends ViewGroup {
         final int parentTop = getPaddingTop();
         final int parentBottom = bottom - top - getPaddingBottom();
 
-        strategy.setAvailiableSpace(bottom - top, right - left);
+        strategy.init(count, bottom - top, right - left);
 
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
@@ -210,7 +212,7 @@ public class Indicator extends ViewGroup {
 //        addView(point3);
 //        CircularProgressBarWithText point4 = new CircularProgressBarWithText(getContext());
 //        addView(point4);
-        strategy = new PointPositionStrategy(5);
+//        strategy = new StatePositionStrategyImpl(5);
     }
 
 

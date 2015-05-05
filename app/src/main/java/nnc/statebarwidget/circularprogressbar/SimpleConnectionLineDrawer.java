@@ -23,7 +23,7 @@ public class SimpleConnectionLineDrawer implements ConnectionLineDrawer{
     public void draw(Canvas canvas, View from, View to) {
         int fromXCenter = from.getLeft() + from.getWidth()/2;
         int toXCenter = to.getLeft() + to.getWidth()/2;
-        //Considered that view items placed horizontally
+        //Considered that view items placed horizontally and share the same y coordinate
         int fromYCenter = from.getTop() + from.getHeight()/2;
         int startX;
         int endX;
