@@ -1,7 +1,6 @@
-package nnc.statebarwidget.circularprogressbar;
+package nnc.indicatorbar;
 
 import android.graphics.Rect;
-import android.util.Log;
 
 /**
  * Strategy to positioning points inside layout

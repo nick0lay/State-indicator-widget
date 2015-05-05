@@ -1,4 +1,4 @@
-package nnc.statebarwidget.circularprogressbar.view;
+package nnc.indicatorbar.view;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -9,12 +9,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
-import nnc.statebarwidget.circularprogressbar.ConnectionLineDrawer;
-import nnc.statebarwidget.circularprogressbar.IndicatorAdapter;
-import nnc.statebarwidget.circularprogressbar.StatePositionStrategyImpl;
-import nnc.statebarwidget.circularprogressbar.SimpleConnectionLineDrawer;
-import nnc.statebarwidget.circularprogressbar.StatePositioningStrategy;
+
+import nnc.indicatorbar.ConnectionLineDrawer;
+import nnc.indicatorbar.IndicatorAdapter;
+import nnc.indicatorbar.SimpleConnectionLineDrawer;
+import nnc.indicatorbar.StatePositionStrategyImpl;
+import nnc.indicatorbar.StatePositioningStrategy;
 
 /**
  * Indicator layout implementation

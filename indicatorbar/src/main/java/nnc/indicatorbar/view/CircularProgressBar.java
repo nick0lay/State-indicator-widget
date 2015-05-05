@@ -1,4 +1,4 @@
-package nnc.statebarwidget.circularprogressbar.view;
+package nnc.indicatorbar.view;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -9,11 +9,10 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import nnc.statebarwidget.R;
+import nnc.indicatorbar.R;
 
 /**
  * Circular progress bar implementation.
@@ -23,7 +22,6 @@ import nnc.statebarwidget.R;
  * implementation.
  */
 public class CircularProgressBar extends View {
-    private static final String TAG = CircularProgressBar.class.getSimpleName();
     /**
      * ProgressBar's line thickness
      */
@@ -104,7 +102,6 @@ public class CircularProgressBar extends View {
         final int width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         final int min = Math.min(width, height);
         setMeasuredDimension(min, min);
-        Log.d(TAG, "Size - " + min + "x" + min);
         centerX = width / 2;
         centerY = height / 2;
         circleRadius = (int)(min/2 - strokeWidth);

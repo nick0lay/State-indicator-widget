@@ -1,4 +1,4 @@
-package nnc.statebarwidget.circularprogressbar;
+package nnc.indicatorbar;
 
 import android.database.DataSetObserver;
 import android.view.View;
@@ -14,7 +14,7 @@ public interface IndicatorAdapter {
     int getCount();
 
     /**
-     * Return {@link View} of each point in indicator
+     * Return {@link android.view.View} of each point in indicator
      * @param position
      * @param indicatorView - view that indicator contains
      * @return

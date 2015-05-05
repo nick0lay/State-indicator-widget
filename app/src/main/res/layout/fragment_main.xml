@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -13,22 +11,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$PlaceholderFragment">
-    <!--nnc.statebarwidget.circularprogressbar.view.CircularProgressBarWithText
-        android:id="@+id/progressCircularWithText"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_toRightOf="@+id/progressBar"/-->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_margin="5dp"
         android:indeterminate="false"
         android:progressDrawable="@drawable/circular_progress_bar"
         android:background="@drawable/circle_shape"
         style="?android:attr/progressBarStyleHorizontal"
         android:max="100"
-        android:progress="65"
-        android:layout_centerHorizontal="true"/>
+        android:progress="65"/>
+
+    <nnc.indicatorbar.view.CircularProgressBar
+        android:id="@+id/progressCircular"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        app:progress="35"
+        app:progressBarThickness="3dp"
+        android:layout_toRightOf="@+id/progressBar"/>
 
     <SeekBar
         android:layout_width="match_parent"
@@ -37,27 +39,15 @@
         android:layout_below="@+id/progressBar"
         android:layout_centerHorizontal="true"/>
 
-    <nnc.statebarwidget.circularprogressbar.view.CircularProgressBar
-        android:id="@+id/progressCircular"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="5dp"
-        app:progress="35"
-        app:progressBarThickness="3dp"
-        android:layout_below="@+id/seekBar"/>
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/circle_shape"
-        android:layout_toRightOf="@+id/progressCircular"
-        android:layout_below="@+id/seekBar"/>
     <LinearLayout
         android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/progressCircular"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +60,7 @@
             android:id="@+id/hide"/>
     </LinearLayout>
 
-    <nnc.statebarwidget.circularprogressbar.view.Indicator
+    <nnc.indicatorbar.view.Indicator
         android:id="@+id/stateBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

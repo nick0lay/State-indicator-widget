@@ -11,7 +11,7 @@
         android:gravity="center_horizontal"
         android:textSize="12dp"/>
 
-    <nnc.statebarwidget.circularprogressbar.view.CircularProgressBar
+    <nnc.indicatorbar.view.CircularProgressBar
         android:id="@+id/progressCircular"
         android:layout_width="30dp"
         android:layout_height="30dp"

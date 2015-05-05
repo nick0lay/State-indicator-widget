@@ -12,10 +12,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
-import nnc.statebarwidget.circularprogressbar.IndicatorAdapterImpl;
-import nnc.statebarwidget.circularprogressbar.view.CircularProgressBar;
-import nnc.statebarwidget.circularprogressbar.view.Indicator;
-
+import nnc.indicatorbar.IndicatorAdapterImpl;
+import nnc.indicatorbar.view.CircularProgressBar;
+import nnc.indicatorbar.view.Indicator;
 
 public class MainActivity extends ActionBarActivity {
 

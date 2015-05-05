@@ -1,4 +1,4 @@
-package nnc.statebarwidget.circularprogressbar;
+package nnc.indicatorbar;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

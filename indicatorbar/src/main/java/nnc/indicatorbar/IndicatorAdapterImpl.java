@@ -1,4 +1,4 @@
-package nnc.statebarwidget.circularprogressbar;
+package nnc.indicatorbar;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import nnc.statebarwidget.R;
-import nnc.statebarwidget.circularprogressbar.view.CircularProgressBar;
+import nnc.indicatorbar.view.CircularProgressBar;
+
 
 /**
- * {@link nnc.statebarwidget.circularprogressbar.IndicatorAdapter} implementation
+ * {@link nnc.indicatorbar.IndicatorAdapter} implementation
  */
 public class IndicatorAdapterImpl implements IndicatorAdapter{
     private Context context;
