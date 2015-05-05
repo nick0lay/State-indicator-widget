@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Random;
-
 import nnc.statebarwidget.R;
 import nnc.statebarwidget.circularprogressbar.view.CircularProgressBar;
 
@@ -32,8 +30,7 @@ public class IndicatorAdapterImpl implements IndicatorAdapter{
         Holder holder;
         if(indicatorView == null) {
             holder = new Holder();
-//            indicatorView = new CircularProgressBarWithText(context);
-            indicatorView = View.inflate(context, R.layout.circular_progress_bar_with_text, null);
+            indicatorView = View.inflate(context, R.layout.custom_circular_progress_bar, null);
             holder.progressBar = (CircularProgressBar) indicatorView.findViewById(R.id.progressCircular);
             holder.above = (TextView) indicatorView.findViewById(R.id.textAbove);
             holder.below = (TextView) indicatorView.findViewById(R.id.textBelow);
@@ -45,9 +42,7 @@ public class IndicatorAdapterImpl implements IndicatorAdapter{
         }
         holder.above.setText("above");
         holder.below.setText("below");
-        int randInt = new Random().nextInt();
-        int progress = randInt/Integer.MAX_VALUE * 100;
-        holder.progressBar.setProgressWithAnimation(progress);
+        holder.progressBar.setProgressWithAnimation(50);
         return indicatorView;
     }
 

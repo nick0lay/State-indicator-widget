@@ -32,16 +32,13 @@ public class StatePositionStrategyImpl implements StatePositioningStrategy {
         this.height = height;
         this.width = width;
         segmentLenght = width/numSegments;
-        Log.d("strategy", "segmentLenght - " + segmentLenght + " calculated for width - " + width + " and numSegments - " + numSegments);
     }
 
     public void getElementRect(int position, int elementWidth, int elementHeight, Rect elementRect){
         float y = height/2;
         float xSegmentCenter = (segmentLenght * (position + 1)) - segmentLenght/2;
-        Log.d("strategy", "xSegmentCenter - " + xSegmentCenter + " segmentLenght - " + segmentLenght);
         int xLeft = (int)(xSegmentCenter - elementWidth/2);
         int xRight = (int)(xSegmentCenter + elementWidth/2);
-        Log.d("strategy", "xLeft - " + xLeft + " xRight - " + xRight + " for elementWidth - " + elementWidth + " elementHeight - " + elementHeight);
         elementRect.bottom = (int)(y + elementHeight/2);
         elementRect.top = (int)(y - elementHeight/2);
         elementRect.left = xLeft;
